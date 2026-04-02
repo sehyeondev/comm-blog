@@ -26,9 +26,9 @@ UWB(IEEE 802.15.4z) [[1]](#ref-1)는 500MHz 이상의 넓은 Bandwidth를 사용
 
 $$d = \frac{c \cdot \Delta t}{2}$$
 
-여기서 중요한 건 Bandwidth와 시간 분해능의 관계다. 500MHz Bandwidth에서 시간 분해능은:
+여기서 중요한 건 Bandwidth와 Time Resolution의 관계다. 500MHz Bandwidth에서 Time Resolution은:
 
-$$\Delta t_{\min} = \frac{1}{500 \times 10^6} = 2\text{ns} \quad \rightarrow \quad \text{거리 분해능 } \approx 60\text{cm}$$
+$$\Delta t_{\min} = \frac{1}{500 \times 10^6} = 2\text{ns} \quad \rightarrow \quad \text{Range Resolution } \approx 60\text{cm}$$
 
 "분해능이 60cm인데 어떻게 10cm 정확도가 나오지?"라고 생각할 수 있다. 분해능은 두 Multipath를 구분하는 최소 거리이고, Leading Edge Detection 등의 후처리를 거치면 분해능보다 훨씬 높은 정확도를 달성할 수 있다.
 
@@ -48,9 +48,9 @@ Wi-Fi RTT는 IEEE 802.11mc의 FTM(Fine Timing Measurement) 프로토콜을 사�
 
 차이는 Bandwidth에서 나온다. 80MHz Wi-Fi 채널이면:
 
-$$\Delta t_{\min} = \frac{1}{80 \times 10^6} = 12.5\text{ns} \quad \rightarrow \quad \text{거리 분해능 } \approx 3.75\text{m}$$
+$$\Delta t_{\min} = \frac{1}{80 \times 10^6} = 12.5\text{ns} \quad \rightarrow \quad \text{Range Resolution } \approx 3.75\text{m}$$
 
-UWB 대비 시간 분해능이 6배 이상 떨어진다. 실제 정확도는 Multipath 처리와 Timestamp 정밀도 개선으로 **1~2m** 정도.
+UWB 대비 Time Resolution이 6배 이상 떨어진다. 실제 정확도는 Multipath 처리와 Timestamp 정밀도 개선으로 **1~2m** 정도.
 
 Wi-Fi 7에서 320MHz 채널이 도입되면 개선될 여지는 있지만, UWB의 500MHz에는 여전히 못 미친다. 그런데 Wi-Fi RTT의 진짜 강점은 정확도가 아니라 **이미 깔려 있는 인프라**다. 전용 Anchor를 새로 설치할 필요 없이, 기존 Wi-Fi AP를 그대로 쓸 수 있다. 이 차이가 실무에서는 꽤 크다.
 
