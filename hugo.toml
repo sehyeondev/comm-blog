@@ -19,7 +19,7 @@ paginate = 10
 
   [params.homeInfoParams]
     Title = "Comm Blog"
-    Content = "무선통신 기술의 원리와 트렌드를 수식과 직관으로 풀어씁니다. Localization · Sensor Fusion · 5G/6G · AI-Native Communication"
+    Content = "무선통신 기술의 원리와 트렌드를 다룹니다. Localization · Sensor Fusion · 5G/6G · AI-Native Communication"
 
   [[params.socialIcons]]
     name = "github"
