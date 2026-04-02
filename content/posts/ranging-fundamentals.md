@@ -1,7 +1,7 @@
 ---
 title: "Ranging Fundamentals: ToF, TDoA, AoA의 원리와 트레이드오프"
-date: 2026-04-02T10:00:00
-draft: false
+date: 2026-04-03
+draft: true
 math: true
 tags: ["Ranging", "ToF", "TDoA", "AoA", "TWR", "Localization"]
 categories: ["Localization"]
@@ -24,11 +24,11 @@ $$d = c \cdot \tau$$
 
 $c$는 빛의 속도($3 \times 10^8$ m/s), $\tau$는 편도 전파 시간.
 
-여기서 바로 문제가 하나 생�다. 편도 시간을 재려면 Anchor와 Target의 **Clock이 정확하게 동기화**되어 있어야 한다. 얼마나 정확해야 하냐면:
+여기서 바로 문제가 하나 생긴다. 편도 시간을 재려면 Anchor와 Target의 **Clock이 정확하게 동기화**되어 있어야 한다. 얼마나 정확해야 하냐면:
 
 $$\Delta d = c \cdot \Delta t = 3 \times 10^8 \times 1 \times 10^{-9} = 0.3\text{ m}$$
 
-**1ns 동기 오차 = 30cm 거리 오차.** 저가 Crystal Oscillator로는 이 수준의 동기화가 어렵다.
+**1ns 동기 오차 = 30cm 거리 오차.** 저가 Crystal Oscillator로는 이 수준의 동기화가 어렵다 [[2]](#ref-2).
 
 ### TWR: 동기화 없이 거리를 재는 방법
 
@@ -53,7 +53,7 @@ DS-TWR(Double-Sided TWR)은 TWR을 두 번 수행한다. 첫 번째는 Anchor가
 
 $$\hat{\tau} = \frac{t_{\text{RTT,1}} \cdot t_{\text{RTT,2}} - t_{\text{reply,A}} \cdot t_{\text{reply,T}}}{t_{\text{RTT,1}} + t_{\text{RTT,2}} + t_{\text{reply,A}} + t_{\text{reply,T}}}$$
 
-이 식의 핵심은 **양쪽 Clock Drift가 대칭적으로 상쇄**된다는 것이다. 수식이 좀 복잡해 보이지만, 아이디어는 "두 번 재서 평균 내면 편향이 줄어든다"와 비슷하다. UWB(802.15.4z)에서 DS-TWR은 사실상 표준 프로토콜이다.
+이 식의 핵심은 **양쪽 Clock Drift가 대칭적으로 상쇄**된다는 것이다. 수식이 좀 복잡해 보이지만, 아이디어는 "두 번 재서 평균 내면 편향이 줄어든다"와 비슷하다. UWB(802.15.4z)에서 DS-TWR은 사실상 표준 프로토콜이다 [[1]](#ref-1).
 
 ### Bandwidth가 정확도의 상한을 결정한다
 
@@ -72,7 +72,7 @@ $$\Delta \tau_{\min} = \frac{1}{BW}$$
 
 BLE의 거리 분해능 300m을 보면 왜 BLE가 RSSI 기반으로 갈 수밖에 없는지 이해가 된다. ToF로는 아무것도 못 한다.
 
-한 가지 주의할 점 — **분해능 ≠ 정확도**다. 분해능은 두 Multipath를 구분하는 최소 거리. Leading Edge Detection이나 Super-Resolution 같은 후처리를 거치면 분해능보다 훨씬 높은 정확도를 달성할 수 있다. UWB가 분해능 60cm에서 10cm 이하 정확도를 내는 것이 이 때문이다.
+한 가지 주의할 점 — **분해능 ≠ 정확도**다. 분해능은 두 Multipath를 구분하는 최소 거리. Leading Edge Detection이나 Super-Resolution 같은 후처리를 거치면 분해능보다 훨씬 높은 정확도를 달성할 수 있다. UWB가 분해능 60cm에서 10cm 이하 정확도를 내는 것이 이 때문이다 [[2]](#ref-2)[[3]](#ref-3).
 
 ### CRLB: 이론적 한계
 
@@ -80,7 +80,7 @@ ToF 추정 정확도의 이론적 하한은 CRLB(Cramer-Rao Lower Bound)로 표�
 
 $$\sigma_{\tau} \geq \frac{1}{2\pi \cdot BW_{\text{eff}} \cdot \sqrt{2 \cdot \text{SNR}}}$$
 
-$BW_{\text{eff}}$는 Effective Bandwidth(RMS Bandwidth). 이 식이 말하는 건 두 가지다:
+$BW_{\text{eff}}$는 Effective Bandwidth(RMS Bandwidth) [[9]](#ref-9). 이 식이 말하는 건 두 가지다:
 
 1. **Bandwidth가 넓을수록** 정확도 향상 — UWB가 유리한 근본적인 이유
 2. **SNR이 높을수록** 정확도 향상 — 가까운 Anchor의 추정이 더 정확한 이유
@@ -95,7 +95,7 @@ TDoA는 Target이 송신한 신호가 **여러 Anchor에 도달하는 시간 차
 
 $$\Delta \tau_{ij} = \tau_i - \tau_j = \frac{d_i - d_j}{c}$$
 
-이 시간 차이는 기하학적으로 **쌍곡선(Hyperbola)**을 정의한다. "Anchor $i$와 Anchor $j$까지의 거리 차이가 일정한 점들의 궤적"이 쌍곡선이니까. 2D에서 위치를 결정하려면 최소 3개 Anchor(2개의 독립 TDoA)가 필요하고, 쌍곡선의 교점이 Target 위치가 된다.
+이 시간 차이는 기하학적으로 **쌍곡선(Hyperbola)**을 정의한다 [[4]](#ref-4). "Anchor $i$와 Anchor $j$까지의 거리 차이가 일정한 점들의 궤적"이 쌍곡선이니까. 2D에서 위치를 결정하려면 최소 3개 Anchor(2개의 독립 TDoA)가 필요하고, 쌍곡선의 교점이 Target 위치가 된다.
 
 ### ToF와 뭐가 다른가
 
@@ -119,7 +119,7 @@ $$\|\mathbf{p} - \mathbf{a}_i\| - \|\mathbf{p} - \mathbf{a}_j\| = c \cdot \Delta
 $\mathbf{p}$는 Target 위치, $\mathbf{a}_i$는 Anchor 위치. 비선형이라 직접 풀 수가 없고, 보통 세 가지 접근법을 쓴다:
 
 - **선형화** — Taylor 전개로 근사 후 Iterative Least Squares. 초기값이 필요하다.
-- **폐쇄형 해** — Chan's Algorithm 같은 방식. 초기값 없이 풀 수 있지만 noise에 더 민감할 수 있다.
+- **폐쇄형 해** — Chan's Algorithm [[7]](#ref-7) 같은 방식. 초기값 없이 풀 수 있지만 noise에 더 민감할 수 있다.
 - **Maximum Likelihood** — 가장 정확하지만 연산량이 크다.
 
 ## AoA (Angle of Arrival)
@@ -148,13 +148,13 @@ $$P(\theta) = \mathbf{a}^H(\theta) \mathbf{R} \mathbf{a}(\theta)$$
 
 $\mathbf{R}$은 수신 신호의 Covariance Matrix. 간단하지만 분해능이 Beamwidth에 제한된다. 비유하자면 손전등을 360도 돌려서 가장 밝은 방향을 찾는 것과 비슷한데, 손전등 빔이 넓으면 정확한 방향을 못 잡는다.
 
-**MUSIC.** Covariance Matrix를 Eigenvalue Decomposition해서 Signal Subspace와 Noise Subspace를 분리한다. Noise Subspace와의 직교성을 이용하면 Beamwidth 한계를 넘어서는 분해능을 얻을 수 있다.
+**MUSIC [[5]](#ref-5).** Covariance Matrix를 Eigenvalue Decomposition해서 Signal Subspace와 Noise Subspace를 분리한다. Noise Subspace와의 직교성을 이용하면 Beamwidth 한계를 넘어서는 분해능을 얻을 수 있다.
 
 $$P_{\text{MUSIC}}(\theta) = \frac{1}{\mathbf{a}^H(\theta) \mathbf{E}_n \mathbf{E}_n^H \mathbf{a}(\theta)}$$
 
 분해능은 뛰어나지만, Snapshot 수가 충분해야 하고 신호 수를 사전에 알아야 한다.
 
-**ESPRIT.** Steering Vector의 Shift-Invariance 구조를 이용해서 Spectral Search 없이 직접 각도를 계산한다. MUSIC보다 연산량이 적으면서 비슷한 성능.
+**ESPRIT [[6]](#ref-6).** Steering Vector의 Shift-Invariance 구조를 이용해서 Spectral Search 없이 직접 각도를 계산한다. MUSIC보다 연산량이 적으면서 비슷한 성능.
 
 ### AoA의 정확도 한계
 
@@ -162,7 +162,7 @@ AoA 추정의 CRLB:
 
 $$\sigma_\theta \geq \frac{1}{\pi \cos\theta} \cdot \sqrt{\frac{6}{N(N^2-1) \cdot \text{SNR}}}$$
 
-이 식에서 읽어낼 수 있는 것:
+이 식은 [[9]](#ref-9)에서 유도된다. 여기서 읽어낼 수 있는 것:
 
 1. **안테나 수 $N$이 늘어나면** 분산이 $N^3$에 반비례하여 감소한다. 안테나를 두 배로 늘리면 정확도가 크게 올라간다.
 2. **Broadside($\theta = 0°$)에서 가장 정확**하고, Endfire($\theta = \pm 90°$)로 가면 $\cos\theta$가 0에 가까워져서 성능이 급격히 나빠진다.
@@ -198,7 +198,7 @@ $$\hat{\mathbf{p}} = \mathbf{a}_k + \hat{d}_k \begin{bmatrix} \cos\hat{\theta}_k
 ### 실제로 쓰이는 Hybrid 사례
 
 - **UWB (802.15.4z)** — DS-TWR + AoA. Apple AirTag, Samsung SmartTag2가 이 구조.
-- **5G NR Positioning** — DL-TDoA + UL-AoA + Multi-RTT를 결합하는 Hybrid가 3GPP Rel-16부터 정의되어 있다.
+- **5G NR Positioning** — DL-TDoA + UL-AoA + Multi-RTT를 결합하는 Hybrid가 3GPP Rel-16부터 정의되어 있다 [[8]](#ref-8).
 - **BLE 5.1** — AoA/AoD + RSSI. 방향은 AoA로, 대략적 거리는 RSSI로.
 
 ## 정리
@@ -209,12 +209,21 @@ Ranging은 Localization의 기초다. ToF, TDoA, AoA 각각은 고유한 강점�
 
 ## References
 
-1. IEEE 802.15.4z-2020, "IEEE Standard for Low-Rate Wireless Networks — Amendment: Enhanced Ultra Wideband (UWB) Physical Layers and Associated Ranging Techniques," 2020.
-2. D. Dardari, A. Conti, U. Ferner, A. Giorgetti, and M. Z. Win, "Ranging With Ultrawide Bandwidth Signals in Multipath Environments," *Proceedings of the IEEE*, vol. 97, no. 2, pp. 404–426, Feb. 2009.
-3. S. Gezici et al., "Localization via Ultra-Wideband Radios: A Look at Positioning Aspects for Future Sensor Networks," *IEEE Signal Processing Magazine*, vol. 22, no. 4, pp. 70–84, Jul. 2005.
-4. G. C. Carter, "Time Delay Estimation for Passive Sonar Signal Processing," *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 29, no. 3, pp. 463–470, Jun. 1981.
-5. R. Schmidt, "Multiple Emitter Location and Signal Parameter Estimation," *IEEE Transactions on Antennas and Propagation*, vol. 34, no. 3, pp. 276–280, Mar. 1986.
-6. R. Roy and T. Kailath, "ESPRIT — Estimation of Signal Parameters via Rotational Invariance Techniques," *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 37, no. 7, pp. 984–995, Jul. 1989.
-7. Y. T. Chan and K. C. Ho, "A Simple and Efficient Estimator for Hyperbolic Location," *IEEE Transactions on Signal Processing*, vol. 42, no. 8, pp. 1905–1915, Aug. 1994.
-8. 3GPP TS 38.305, "NG Radio Access Network (NG-RAN); Stage 2 functional specification of User Equipment (UE) positioning in NG-RAN."
-9. H. L. Van Trees, *Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory*, Wiley, 2002.
+
+<span id="ref-1">1.</span> IEEE 802.15.4z-2020, "IEEE Standard for Low-Rate Wireless Networks — Amendment: Enhanced Ultra Wideband (UWB) Physical Layers and Associated Ranging Techniques," 2020.
+
+<span id="ref-2">2.</span> D. Dardari, A. Conti, U. Ferner, A. Giorgetti, and M. Z. Win, "Ranging With Ultrawide Bandwidth Signals in Multipath Environments," *Proceedings of the IEEE*, vol. 97, no. 2, pp. 404–426, Feb. 2009.
+
+<span id="ref-3">3.</span> S. Gezici et al., "Localization via Ultra-Wideband Radios: A Look at Positioning Aspects for Future Sensor Networks," *IEEE Signal Processing Magazine*, vol. 22, no. 4, pp. 70–84, Jul. 2005.
+
+<span id="ref-4">4.</span> G. C. Carter, "Time Delay Estimation for Passive Sonar Signal Processing," *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 29, no. 3, pp. 463–470, Jun. 1981.
+
+<span id="ref-5">5.</span> R. Schmidt, "Multiple Emitter Location and Signal Parameter Estimation," *IEEE Transactions on Antennas and Propagation*, vol. 34, no. 3, pp. 276–280, Mar. 1986.
+
+<span id="ref-6">6.</span> R. Roy and T. Kailath, "ESPRIT — Estimation of Signal Parameters via Rotational Invariance Techniques," *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 37, no. 7, pp. 984–995, Jul. 1989.
+
+<span id="ref-7">7.</span> Y. T. Chan and K. C. Ho, "A Simple and Efficient Estimator for Hyperbolic Location," *IEEE Transactions on Signal Processing*, vol. 42, no. 8, pp. 1905–1915, Aug. 1994.
+
+<span id="ref-8">8.</span> 3GPP TS 38.305, "NG Radio Access Network (NG-RAN); Stage 2 functional specification of User Equipment (UE) positioning in NG-RAN."
+
+<span id="ref-9">9.</span> H. L. Van Trees, *Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory*, Wiley, 2002.
