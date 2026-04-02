@@ -34,7 +34,7 @@ $$\Delta t_{\min} = \frac{1}{500 \times 10^6} = 2\text{ns} \quad \rightarrow \qu
 
 UWB의 또 다른 강점은 **Multipath Robustness**이다 [[8]](#ref-8). Pulse가 짧으니까 Direct Path와 Reflected Path를 시간 영역에서 분리할 수 있다. 실내처럼 반사가 많은 환경에서 이건 큰 이점이다.
 
-실무에서는 ToF 외에 TDoA, AoA도 사용하고, 이들을 조합한 **Hybrid 방식**이 가장 높은 정확도를 보인다.
+실제 시스템에서는 ToF 외에 TDoA, AoA도 사용하고, 이들을 조합한 **Hybrid 방식**이 가장 높은 정확도를 보인다.
 
 | 방식 | 원리 | 특징 |
 |---|---|---|
@@ -52,7 +52,7 @@ $$\Delta t_{\min} = \frac{1}{80 \times 10^6} = 12.5\text{ns} \quad \rightarrow \
 
 UWB 대비 Time Resolution이 6배 이상 떨어진다. 실제 정확도는 Multipath 처리와 Timestamp 정밀도 개선으로 **1~2m** 정도.
 
-Wi-Fi 7에서 320MHz 채널이 도입되면 개선될 여지는 있지만, UWB의 500MHz에는 여전히 못 미친다. 그런데 Wi-Fi RTT의 진짜 강점은 정확도가 아니라 **이미 깔려 있는 인프라**다. 전용 Anchor를 새로 설치할 필요 없이, 기존 Wi-Fi AP를 그대로 쓸 수 있다. 이 차이가 실무에서는 꽤 크다.
+Wi-Fi 7에서 320MHz 채널이 도입되면 개선될 여지는 있지만, UWB의 500MHz에는 여전히 못 미친다. 그런데 Wi-Fi RTT의 진짜 강점은 정확도가 아니라 **이미 깔려 있는 인프라**다. 전용 Anchor를 새로 설치할 필요 없이, 기존 Wi-Fi AP를 그대로 쓸 수 있다. 이 차이는 도입 비용 면에서 상당히 크다.
 
 ### BLE: 싸고, 전력을 거의 안 먹는다
 
