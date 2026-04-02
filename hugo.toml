@@ -1,0 +1,82 @@
+baseURL = 'https://sehyeondev.github.io/comm-blog/'
+languageCode = 'ko'
+title = 'Comm Blog'
+theme = 'PaperMod'
+paginate = 10
+
+[params]
+  env = "production"
+  description = "통신산업 기술 트렌드와 심층 분석 블로그"
+  author = "Sehyeon"
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+
+  [params.homeInfoParams]
+    Title = "Comm Blog"
+    Content = "무선통신, 네트워크, 위성통신 등 통신산업 전반의 기술 트렌드와 심층 분석을 다룹니다."
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/sehyeondev"
+
+[params.assets]
+  disableFingerprinting = false
+
+[params.fuseOpts]
+  isCaseSensitive = false
+  shouldSort = true
+  location = 0
+  distance = 1000
+  threshold = 0.4
+  minMatchCharLength = 0
+  keys = ["title", "permalink", "summary", "content"]
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    style = "monokai"
+
+[markup.goldmark.extensions.passthrough]
+  enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+  block = [["\\[", "\\]"], ["$$", "$$"]]
+  inline = [["\\(", "\\)"], ["$", "$"]]
+
+[[menu.main]]
+  identifier = "categories"
+  name = "Categories"
+  url = "/categories/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "archives"
+  name = "Archives"
+  url = "/archives/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 40
