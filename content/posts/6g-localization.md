@@ -112,3 +112,14 @@ Localization을 연구하면서 흥미로운 건, 이 분야가 점점 "독립�
 6G에서 Localization은 더 이상 부가 기능이 아니다. ITU-R IMT-2030은 Sensing을 6G의 새로운 Capability로 명시했고, ISAC는 통신과 센싱의 경계를 허물고 있다. cm급 정확도가 시스템 요구사항이 되면서, Sub-THz 대역의 넓은 Bandwidth, RIS를 통한 NLOS 극복, AI/ML 기반 Positioning이 이를 뒷받침하는 핵심 기술로 부상하고 있다.
 
 3GPP Rel-20에서 6G Study가 본격화되고 있는 지금이, 이 흐름을 파악하기에 좋은 시점이라고 생각한다. 앞으로 ISAC의 구체적인 기술 구조나, AI/ML Positioning의 최신 연구 동향도 개별 포스팅으로 다뤄볼 계획이다.
+
+## References
+
+1. ITU-R, "Recommendation ITU-R M.2160-0: Framework and overall objectives of the future development of IMT for 2030 and beyond," Nov. 2023. [[PDF]](https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.2160-0-202311-I!!PDF-E.pdf)
+2. 3GPP, "Release 18 Specifications," 2024. [[Link]](https://www.3gpp.org/specifications-technologies/releases/release-18)
+3. Ericsson, "5G Advanced positioning in 3GPP Release 18," Nov. 2024. [[Blog]](https://www.ericsson.com/en/blog/2024/11/5g-advanced-positioning-in-3gpp-release-18)
+4. Huawei, "Integrated Sensing and Communication: From Concept to Practice." [[Link]](https://www.huawei.com/en/huaweitech/future-technologies/integrated-sensing-communication-concept-practice)
+5. C. De Lima et al., "6G White Paper on Localization and Sensing," arXiv:2006.01779, 2020. [[arXiv]](https://arxiv.org/abs/2006.01779)
+6. H. Wymeersch et al., "Integration of Communication with Sensing, Localization, and Computing: The Role of ISAC in 6G," arXiv:2510.04413, 2025. [[arXiv]](https://arxiv.org/abs/2510.04413)
+7. T. S. Rappaport et al., "Terahertz Communications and Sensing for 6G and Beyond," arXiv:2307.10321, 2023. [[arXiv]](https://arxiv.org/abs/2307.10321)
+8. Ericsson, "6G standardization timeline and technology principles," Mar. 2024. [[Blog]](https://www.ericsson.com/en/blog/2024/3/6g-standardization-timeline-and-technology-principles)

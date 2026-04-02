@@ -217,3 +217,15 @@ $$\hat{\mathbf{p}} = \mathbf{a}_k + \hat{d}_k \begin{bmatrix} \cos\hat{\theta}_k
 Ranging은 Localization의 기초 단계이며, ToF, TDoA, AoA 각각은 고유한 강점과 한계를 가진다. **어떤 방식이 최적인지는 시스템의 제약 조건** — Anchor 수, 동기화 가능 여부, Target 전력 제한, 요구 정확도 — 에 따라 달라진다.
 
 실제 시스템은 단일 방식보다 Hybrid 구조를 채택하는 경향이 뚜렷하다. 하나의 Anchor에서 거리와 방향을 동시에 추정하고, 여러 Anchor의 결과를 최적으로 결합하는 구조가 정확도와 Robustness 모두에서 유리하다. 다음 포스팅에서는 이 결합 과정 — 즉 여러 추정치를 최적으로 융합하는 **Sensor Fusion**의 원리를 다룰 예정이다.
+
+## References
+
+1. IEEE 802.15.4z-2020, "IEEE Standard for Low-Rate Wireless Networks — Amendment: Enhanced Ultra Wideband (UWB) Physical Layers and Associated Ranging Techniques," 2020.
+2. D. Dardari, A. Conti, U. Ferner, A. Giorgetti, and M. Z. Win, "Ranging With Ultrawide Bandwidth Signals in Multipath Environments," *Proceedings of the IEEE*, vol. 97, no. 2, pp. 404–426, Feb. 2009.
+3. S. Gezici et al., "Localization via Ultra-Wideband Radios: A Look at Positioning Aspects for Future Sensor Networks," *IEEE Signal Processing Magazine*, vol. 22, no. 4, pp. 70–84, Jul. 2005.
+4. G. C. Carter, "Time Delay Estimation for Passive Sonar Signal Processing," *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 29, no. 3, pp. 463–470, Jun. 1981.
+5. R. Schmidt, "Multiple Emitter Location and Signal Parameter Estimation," *IEEE Transactions on Antennas and Propagation*, vol. 34, no. 3, pp. 276–280, Mar. 1986.
+6. R. Roy and T. Kailath, "ESPRIT — Estimation of Signal Parameters via Rotational Invariance Techniques," *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 37, no. 7, pp. 984–995, Jul. 1989.
+7. Y. T. Chan and K. C. Ho, "A Simple and Efficient Estimator for Hyperbolic Location," *IEEE Transactions on Signal Processing*, vol. 42, no. 8, pp. 1905–1915, Aug. 1994.
+8. 3GPP TS 38.305, "NG Radio Access Network (NG-RAN); Stage 2 functional specification of User Equipment (UE) positioning in NG-RAN."
+9. H. L. Van Trees, *Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory*, Wiley, 2002.

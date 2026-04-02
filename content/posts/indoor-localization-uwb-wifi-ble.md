@@ -8,7 +8,7 @@ categories: ["Localization"]
 summary: "UWB, Wi-Fi RTT, BLE 기반 Indoor Localization의 원리, 정확도, 인프라 요건을 비교하고 각 기술이 적합한 응용 시나리오를 분석합니다."
 ---
 
-## 들어가며
+## Introduction
 
 Indoor Localization은 GPS가 동작하지 않는 실내 환경에서 단말의 위치를 추정하는 기술이다. 스마트폰, IoT 기기, 로봇 등 실내에서 위치 정보가 필요한 응용이 늘어나면서, UWB, Wi-Fi, BLE 세 가지 무선 기술이 각각의 강점을 가지고 시장에서 경쟁하고 있다.
 
@@ -133,8 +133,19 @@ Wi-Fi 7(802.11be)의 320MHz Bandwidth는 RTT 정확도를 개선할 여지를 �
 ### BLE
 Bluetooth 6.0에서 Channel Sounding이 도입되었다. Phase-Based Ranging으로 **cm급 거리 추정**이 BLE에서도 가능해지며, UWB의 영역이었던 정밀 Localization에 BLE가 진입할 수 있는 기반이 마련되었다.
 
-## 마치며
+## Conclusion
 
 UWB, Wi-Fi, BLE는 경쟁 기술이라기보다 **상호 보완적인 기술**이다. 정밀도가 필요하면 UWB, 인프라 효율이 중요하면 Wi-Fi RTT, 전력과 비용이 우선이면 BLE가 적합하다. 실제 시스템에서는 이들을 조합한 Multi-Technology Fusion이 최적의 Indoor Localization 성능을 제공한다.
 
 각 기술의 표준이 빠르게 진화하고 있어, 앞으로 기술 간 경계는 더 모호해질 것이다. 특히 BLE Channel Sounding과 Wi-Fi Sensing의 등장은 기존의 기술 선택 기준을 재정의할 가능성이 있다. 이러한 변화를 지속적으로 추적하는 것이 중요하다.
+
+## References
+
+1. IEEE 802.15.4z-2020, "IEEE Standard for Low-Rate Wireless Networks — Amendment: Enhanced Ultra Wideband (UWB) Physical Layers and Associated Ranging Techniques," 2020.
+2. IEEE 802.11mc (802.11-2016), "IEEE Standard for Information Technology — Fine Timing Measurement (FTM)."
+3. Bluetooth SIG, "Bluetooth Core Specification v5.1 — Direction Finding," 2019. [[Link]](https://www.bluetooth.com/specifications/specs/core-specification-5-1/)
+4. Bluetooth SIG, "Bluetooth Core Specification v6.0 — Channel Sounding," 2024. [[Link]](https://www.bluetooth.com/specifications/specs/core-specification-6-0/)
+5. FiRa Consortium, "UWB Technology Overview." [[Link]](https://www.firaconsortium.org/discover-uwb/uwb-technology-overview)
+6. IEEE 802.11bf, "WLAN Sensing (Wi-Fi Sensing)," Task Group bf. [[Link]](https://www.ieee802.org/11/Reports/tgbf_update.htm)
+7. Google, "Wi-Fi RTT (IEEE 802.11mc) — Android Developers." [[Link]](https://developer.android.com/develop/connectivity/wifi/wifi-rtt)
+8. S. Gezici et al., "Localization via Ultra-Wideband Radios: A Look at Positioning Aspects for Future Sensor Networks," *IEEE Signal Processing Magazine*, vol. 22, no. 4, pp. 70–84, Jul. 2005.
