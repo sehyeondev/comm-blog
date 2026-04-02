@@ -18,11 +18,11 @@ summary: "UWB, Wi-Fi RTT, BLE — 세 기술 모두 실내 위치를 잡을 수 
 
 Indoor Localization의 출발점은 **기준점(Anchor)과 단말 사이의 거리 또는 방향을 추정**하는 것이다. 이 단계를 Ranging이라고 하고, 기술마다 접근 방식이 다르다.
 
-(각 Ranging 방식의 수학적 디테일은 [Ranging Fundamentals](/comm-blog/posts/ranging-fundamentals/) 포스팅에서 다루고 있다.)
+(각 Ranging 방식의 수학적 디테일은 추후 별도 포스팅에서 다룰 예정이다.)
 
 ### UWB: 시간으로 거리를 잰다
 
-UWB(IEEE 802.15.4z)는 500MHz 이상의 넓은 Bandwidth를 사용한다. 핵심은 **ToF(Time of Flight)** — 전파가 오가는 시간을 측정해서 거리를 계산한다.
+UWB(IEEE 802.15.4z) [[1]](#ref-1)는 500MHz 이상의 넓은 Bandwidth를 사용한다. 핵심은 **ToF(Time of Flight)** — 전파가 오가는 시간을 측정해서 거리를 계산한다.
 
 $$d = \frac{c \cdot \Delta t}{2}$$
 
@@ -32,7 +32,7 @@ $$\Delta t_{\min} = \frac{1}{500 \times 10^6} = 2\text{ns} \quad \rightarrow \qu
 
 "분해능이 60cm인데 어떻게 10cm 정확도가 나오지?"라고 생각할 수 있다. 분해능은 두 Multipath를 구분하는 최소 거리이고, Leading Edge Detection 등의 후처리를 거치면 분해능보다 훨씬 높은 정확도를 달성할 수 있다.
 
-UWB의 또 다른 강점은 **Multipath Robustness**이다. Pulse가 짧으니까 Direct Path와 Reflected Path를 시간 영역에서 분리할 수 있다. 실내처럼 반사가 많은 환경에서 이건 큰 이점이다.
+UWB의 또 다른 강점은 **Multipath Robustness**이다 [[8]](#ref-8). Pulse가 짧으니까 Direct Path와 Reflected Path를 시간 영역에서 분리할 수 있다. 실내처럼 반사가 많은 환경에서 이건 큰 이점이다.
 
 실무에서는 ToF 외에 TDoA, AoA도 사용하고, 이들을 조합한 **Hybrid 방식**이 가장 높은 정확도를 보인다.
 
@@ -44,7 +44,7 @@ UWB의 또 다른 강점은 **Multipath Robustness**이다. Pulse가 짧으니�
 
 ### Wi-Fi RTT: 이미 깔려 있는 인프라를 활용한다
 
-Wi-Fi RTT는 IEEE 802.11mc의 FTM(Fine Timing Measurement) 프로토콜을 사용한다. 원리는 UWB의 TWR과 같다 — Round Trip Time을 측정해서 거리를 계산한다.
+Wi-Fi RTT는 IEEE 802.11mc의 FTM(Fine Timing Measurement) 프로토콜을 사용한다 [[2]](#ref-2). 원리는 UWB의 TWR과 같다 — Round Trip Time을 측정해서 거리를 계산한다.
 
 차이는 Bandwidth에서 나온다. 80MHz Wi-Fi 채널이면:
 
@@ -62,7 +62,7 @@ $$RSSI = RSSI_0 - 10n\log_{10}\left(\frac{d}{d_0}\right)$$
 
 솔직히 RSSI 기반 거리 추정은 정확도가 좋지 않다. Shadowing, Multipath Fading에 크게 흔들리고, **수 미터 수준**이 한계다. 그런데 BLE Beacon은 저렴하고 배터리가 수년간 간다. 정밀한 좌표가 필요 없고 "이 사람이 어느 구역에 있는가" 정도만 알면 되는 시나리오에서는 충분하다.
 
-BLE 5.1에서 **AoA/AoD**가 도입되면서 상황이 좀 달라졌다. Antenna Array의 Phase Difference로 방향을 추정하는 방식인데, **Sub-meter 정확도**가 가능해졌다. 다만 전용 Locator 하드웨어가 필요해서, RSSI 방식의 저비용 장점이 일부 상쇄된다.
+BLE 5.1에서 **AoA/AoD**가 도입되면서 상황이 좀 달라졌다 [[3]](#ref-3). Antenna Array의 Phase Difference로 방향을 추정하는 방식인데, **Sub-meter 정확도**가 가능해졌다. 다만 전용 Locator 하드웨어가 필요해서, RSSI 방식의 저비용 장점이 일부 상쇄된다.
 
 ## 한눈에 비교
 
@@ -83,7 +83,7 @@ BLE 5.1에서 **AoA/AoD**가 도입되면서 상황이 좀 달라졌다. Antenna
 
 ### cm급이 필요하면: UWB
 
-- **Digital Key** — 차량 잠금 해제에는 cm급 정확도와 Relay Attack 방지가 필수다. CCC 표준이 UWB Secure Ranging을 요구한다.
+- **Digital Key** — 차량 잠금 해제에는 cm급 정확도와 Relay Attack 방지가 필수다. CCC 표준이 UWB Secure Ranging을 요구한다 [[5]](#ref-5).
 - **Asset Tracking** — 공장, 물류 창고에서 선반 단위로 위치를 구분하려면 10cm급이 필요하다.
 - **AR Navigation** — 자연스러운 AR Overlay를 위해서는 사용자 위치를 정밀하게 추적해야 한다.
 
@@ -94,7 +94,7 @@ BLE 5.1에서 **AoA/AoD**가 도입되면서 상황이 좀 달라졌다. Antenna
 - **쇼핑몰, 공항** — 이미 Wi-Fi AP가 빼곡하다. 추가 인프라 없이 1~2m 정확도면 경로 안내에 충분하다.
 - **사무실, 병원** — 기존 Wi-Fi 망을 그대로 활용.
 
-802.11mc를 지원하는 AP가 필요하지만, 요즘 나오는 AP들은 대부분 지원한다. Android 9부터 WifiRttManager API도 제공되어서 앱 개발도 어렵지 않다.
+802.11mc를 지원하는 AP가 필요하지만, 요즘 나오는 AP들은 대부분 지원한다. Android 9부터 WifiRttManager API도 제공되어서 앱 개발도 어렵지 않다 [[7]](#ref-7).
 
 Wi-Fi에서는 **CSI 기반 Fingerprinting**도 가능하다. Radio Map을 미리 만들어두고 실시간 CSI를 매칭하는 방식인데, 환경이 바뀌면 Radio Map도 갱신해야 한다는 한계가 있다. RTT와 결합하면 서로 보완이 된다.
 
@@ -118,11 +118,11 @@ Wi-Fi에서는 **CSI 기반 Fingerprinting**도 가능하다. Radio Map을 미�
 
 ## 앞으로 어떻게 달라질까
 
-**UWB** — IEEE 802.15.4ab에서 차세대 표준이 논의 중이다. 더 높은 Data Rate, 개선된 Ranging 정확도, 저전력 모드가 목표. FiRa와 CCC를 중심으로 Ecosystem이 확장되고 있고, 스마트폰 탑재율도 계속 올라가고 있다.
+**UWB** — IEEE 802.15.4ab에서 차세대 표준이 논의 중이다. 더 높은 Data Rate, 개선된 Ranging 정확도, 저전력 모드가 목표. FiRa [[5]](#ref-5)와 CCC를 중심으로 Ecosystem이 확장되고 있고, 스마트폰 탑재율도 계속 올라가고 있다.
 
-**Wi-Fi** — Wi-Fi 7(802.11be)의 320MHz Bandwidth는 RTT 정확도 개선 여지를 준다. 더 흥미로운 건 802.11bf의 **Wi-Fi Sensing** 표준. CSI 기반 Presence Detection, Gesture Recognition이 표준화되면 Localization과 Sensing의 경계가 흐려진다.
+**Wi-Fi** — Wi-Fi 7(802.11be)의 320MHz Bandwidth는 RTT 정확도 개선 여지를 준다. 더 흥미로운 건 802.11bf의 **Wi-Fi Sensing** 표준 [[6]](#ref-6). CSI 기반 Presence Detection, Gesture Recognition이 표준화되면 Localization과 Sensing의 경계가 흐려진다.
 
-**BLE** — Bluetooth 6.0에서 **Channel Sounding**이 도입되었다. Phase-Based Ranging으로 cm급 거리 추정이 BLE에서도 가능해지는 것. 이게 본격화되면 UWB의 영역이었던 정밀 Localization에 BLE가 진입하게 된다. 개인적으로 가장 주목하고 있는 변화다.
+**BLE** — Bluetooth 6.0에서 **Channel Sounding**이 도입되었다 [[4]](#ref-4). Phase-Based Ranging으로 cm급 거리 추정이 BLE에서도 가능해지는 것. 이게 본격화되면 UWB의 영역이었던 정밀 Localization에 BLE가 진입하게 된다. 개인적으로 가장 주목하고 있는 변화다.
 
 ## 정리
 
@@ -132,11 +132,19 @@ UWB, Wi-Fi, BLE는 경쟁 관계라기보다 **상호 보완적**이다. 정밀�
 
 ## References
 
-1. IEEE 802.15.4z-2020, "IEEE Standard for Low-Rate Wireless Networks — Amendment: Enhanced Ultra Wideband (UWB) Physical Layers and Associated Ranging Techniques," 2020.
-2. IEEE 802.11mc (802.11-2016), "IEEE Standard for Information Technology — Fine Timing Measurement (FTM)."
-3. Bluetooth SIG, "Bluetooth Core Specification v5.1 — Direction Finding," 2019. [[Link]](https://www.bluetooth.com/specifications/specs/core-specification-5-1/)
-4. Bluetooth SIG, "Bluetooth Core Specification v6.0 — Channel Sounding," 2024. [[Link]](https://www.bluetooth.com/specifications/specs/core-specification-6-0/)
-5. FiRa Consortium, "UWB Technology Overview." [[Link]](https://www.firaconsortium.org/discover-uwb/uwb-technology-overview)
-6. IEEE 802.11bf, "WLAN Sensing (Wi-Fi Sensing)," Task Group bf. [[Link]](https://www.ieee802.org/11/Reports/tgbf_update.htm)
-7. Google, "Wi-Fi RTT (IEEE 802.11mc) — Android Developers." [[Link]](https://developer.android.com/develop/connectivity/wifi/wifi-rtt)
-8. S. Gezici et al., "Localization via Ultra-Wideband Radios: A Look at Positioning Aspects for Future Sensor Networks," *IEEE Signal Processing Magazine*, vol. 22, no. 4, pp. 70–84, Jul. 2005.
+
+<span id="ref-1">1.</span> IEEE 802.15.4z-2020, "IEEE Standard for Low-Rate Wireless Networks — Amendment: Enhanced Ultra Wideband (UWB) Physical Layers and Associated Ranging Techniques," 2020.
+
+<span id="ref-2">2.</span> IEEE 802.11mc (802.11-2016), "IEEE Standard for Information Technology — Fine Timing Measurement (FTM)."
+
+<span id="ref-3">3.</span> Bluetooth SIG, "Bluetooth Core Specification v5.1 — Direction Finding," 2019. [[Link]](https://www.bluetooth.com/specifications/specs/core-specification-5-1/)
+
+<span id="ref-4">4.</span> Bluetooth SIG, "Bluetooth Core Specification v6.0 — Channel Sounding," 2024. [[Link]](https://www.bluetooth.com/specifications/specs/core-specification-6-0/)
+
+<span id="ref-5">5.</span> FiRa Consortium, "UWB Technology Overview." [[Link]](https://www.firaconsortium.org/discover-uwb/uwb-technology-overview)
+
+<span id="ref-6">6.</span> IEEE 802.11bf, "WLAN Sensing (Wi-Fi Sensing)," Task Group bf. [[Link]](https://www.ieee802.org/11/Reports/tgbf_update.htm)
+
+<span id="ref-7">7.</span> Google, "Wi-Fi RTT (IEEE 802.11mc) — Android Developers." [[Link]](https://developer.android.com/develop/connectivity/wifi/wifi-rtt)
+
+<span id="ref-8">8.</span> S. Gezici et al., "Localization via Ultra-Wideband Radios: A Look at Positioning Aspects for Future Sensor Networks," *IEEE Signal Processing Magazine*, vol. 22, no. 4, pp. 70–84, Jul. 2005.

@@ -19,7 +19,7 @@ paginate = 10
 
   [params.homeInfoParams]
     Title = "Comm Blog"
-    Content = "무선통신, 네트워크, 위성통신 등 통신산업 전반의 기술 트렌드와 심층 분석을 다룹니다."
+    Content = "무선통신 기술의 원리와 트렌드를 수식과 직관으로 풀어씁니다. Localization · Sensor Fusion · 5G/6G · AI-Native Communication"
 
   [[params.socialIcons]]
     name = "github"

@@ -13,6 +13,17 @@
 <meta name="twitter:title" content="{{ .Title }}" />
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}" />
 
+<!-- References styling -->
+<style>
+  .post-content p:has(span[id^="ref-"]) {
+    padding-left: 2.2em;
+    text-indent: -2.2em;
+    font-size: 0.9em;
+    line-height: 1.7;
+    margin-bottom: 0.4em;
+  }
+</style>
+
 <!-- KaTeX for math rendering -->
 {{ if or .Params.math (and .Site.Params.math (ne .Params.math false)) }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -34,7 +45,13 @@
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+        const isDark = document.body.className.includes("dark");
+        mermaid.initialize({
+            startOnLoad: true,
+            securityLevel: "loose",
+            theme: isDark ? "dark" : "neutral",
+            themeVariables: isDark ? { primaryColor: "#3b82f6", lineColor: "#6b7280" } : {}
+        });
     });
 </script>
 {{ end }}
