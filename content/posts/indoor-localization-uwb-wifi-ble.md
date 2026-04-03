@@ -87,6 +87,18 @@ BLE 5.1에서는 **AoA(Angle of Arrival) / AoD(Angle of Departure)** 가 도입�
 
 ### cm급이 필요하면: UWB
 
+<div style="display: flex; gap: 24px; align-items: flex-end;">
+  <figure style="flex: 2; min-width: 0; margin: 0;">
+    <img src="/comm-blog/images/airtag-precision-finding.jpg" alt="Apple AirTag의 Precision Finding UI. UWB를 이용해 방향과 거리를 cm 단위로 안내한다.">
+    <figcaption>Apple AirTag의 Precision Finding UI. (Image: Apple)</figcaption>
+  </figure>
+  <figure style="flex: 3; min-width: 0; margin: 0;">
+    <img src="/comm-blog/images/galaxy-smarttag.png" alt="Samsung Galaxy SmartTag2와 SmartThings Find UI. 가방에 부착된 SmartTag2의 위치를 지도에서 확인할 수 있다.">
+    <figcaption>Samsung Galaxy SmartTag2와 SmartThings Find UI. (Image: Samsung)</figcaption>
+  </figure>
+</div>
+<figcaption style="margin-top: 8px;">AirTag와 SmartTag2 모두 BLE + UWB를 지원하는 대표적인 Item Tracker다.</figcaption>
+
 - **Digital Key** — 차량 잠금 해제에는 cm급 정확도와 Relay Attack 방지가 필수다. Relay Attack은 공격자가 신호를 중계해서 멀리 있는 키를 가까이 있는 것처럼 속이는 공격인데, 기존 Keyless Entry 시스템은 BLE나 NFC 기반이라 이에 취약했다. UWB는 ToF로 실제 물리적 거리를 측정하기 때문에 Relay Latency를 탐지할 수 있고, STS로 타임스탬프를 암호화해서 위조도 방지한다. CCC(Car Connectivity Consortium) 표준이 이 UWB Secure Ranging을 요구한다 [[7]](#ref-7).
 - **Asset Tracking** — 공장, 물류 창고에서 선반 단위로 위치를 구분하려면 10cm급이 필요하다. Wi-Fi RTT의 1–2m 정확도로는 인접한 선반을 구분할 수 없고, BLE RSSI의 3–5m는 더더욱 부족하다.
 - **AR Navigation** — 카메라 화면 위에 경로 안내 같은 가상 정보를 겹쳐 보여주는 AR Overlay가 자연스러우려면, 사용자 위치를 정밀하게 추적해야 한다. 위치 오차가 1m만 넘어도 Overlay가 벽을 뚫거나 엉뚱한 곳을 가리키게 된다.
@@ -94,6 +106,11 @@ BLE 5.1에서는 **AoA(Angle of Arrival) / AoD(Angle of Departure)** 가 도입�
 대신 전용 Anchor 인프라를 깔아야 한다. 예를 들어 Pozyx의 UWB Anchor는 개당 약 1,000 USD 수준이고 [[13]](#ref-13), 넓은 공간이면 비용이 만만치 않을 것이다.
 
 ### 인프라를 새로 깔 수 없으면: Wi-Fi RTT
+
+<figure style="max-width: 400px;">
+  <img src="/comm-blog/images/wifi-rtt.png" alt="Wi-Fi RTT 개념도. 기존 Wi-Fi AP를 활용해 실내 위치를 측정한다.">
+  <figcaption>Wi-Fi RTT 개념도. 기존 Wi-Fi AP를 활용해 실내 위치를 측정한다. (Image: Navigine)</figcaption>
+</figure>
 
 - **쇼핑몰, 공항** — 이미 Wi-Fi AP가 빼곡하다. 경로 안내에는 1–2m 정확도면 충분하고, 이를 위해 UWB Anchor를 새로 설치하는 건 비용 대비 효과가 맞지 않는다.
 - **사무실, 병원** — 기존 Wi-Fi 망을 그대로 활용할 수 있어서, 회의실 찾기나 장비 위치 파악 같은 용도에 빠르게 적용 가능하다.
@@ -103,6 +120,11 @@ BLE 5.1에서는 **AoA(Angle of Arrival) / AoD(Angle of Departure)** 가 도입�
 Wi-Fi에서는 **CSI(Channel State Information) 기반 Fingerprinting**도 가능하다. CSI는 각 Subcarrier별 채널 응답 정보로, RSSI보다 훨씬 풍부한 공간 특성을 담고 있다. Radio Map을 미리 만들어두고 실시간 CSI를 매칭하는 방식인데, 환경이 바뀌면 Radio Map도 갱신해야 한다는 한계가 있다. RTT와 결합하면 서로 보완이 된다. (나중에 이 내용도 자세히 다뤄보려 한다.)
 
 ### 배터리 교체 없이 오래 가야 하면: BLE
+
+<figure style="max-width: 480px;">
+  <img src="/comm-blog/images/ibeacon-assortment.jpg" alt="다양한 벤더의 iBeacon 분해 사진. 코인 배터리 하나와 소형 PCB로 구성되어 있다.">
+  <figcaption>다양한 벤더의 iBeacon 분해 사진. 코인 배터리 하나와 소형 PCB로 구성되어 있다. (Source: <a href="https://commons.wikimedia.org/wiki/File:An_assortment_of_iBeacon_from_different_vendors.jpg">Wikimedia Commons</a>, CC BY-SA 3.0)</figcaption>
+</figure>
 
 - **Proximity Detection** — 매장 근처에 오면 쿠폰 알림을 보내는 정도. 정확한 좌표가 아니라 "이 사람이 매장 근처에 있는가"만 알면 되므로, RSSI의 3–5m 정확도로 충분하다. Beacon 하나에 10–25 USD면 대량 배치에도 부담이 적다.
 - **Item Finding** — Apple AirTag, Samsung SmartTag가 대표적이다. BLE Beacon의 초저전력 덕분에 코인 배터리 하나로 약 1년 이상 동작한다.
