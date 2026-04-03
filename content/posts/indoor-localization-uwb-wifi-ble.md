@@ -18,7 +18,7 @@ summary: "UWB, Wi-Fi RTT, BLE — 세 기술 모두 실내 위치를 잡을 수 
 
 Indoor Localization의 출발점은 **기준점(Anchor)과 단말 사이의 거리 또는 방향을 추정**하는 것이다. 이 단계를 Ranging이라고 하고, 기술마다 접근 방식이 다르다.
 
-(각 Ranging 방식의 수학적 디테일은 추후 별도 포스팅에서 다룰 예정이다.)
+(각 Ranging 방식의 수학적 디테일은 [Ranging Fundamentals](/comm-blog/posts/ranging-fundamentals/)에서 다룬다.)
 
 ### UWB: 시간 기반 거리 측정
 

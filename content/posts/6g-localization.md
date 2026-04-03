@@ -61,7 +61,7 @@ ITU-R의 IMT-2030 Framework(Recommendation M.2160, 2023)는 6G의 새로운 Capa
 
 $$\Delta d = \frac{c}{2 \cdot BW}$$
 
-예를 들어 1cm의 거리 분해능을 얻으려면 약 15GHz Bandwidth가 필요한데, 이는 Sub-THz 이상에서나 현실적인 수치다. 물론 분해능과 실제 정확도는 다르지만, Bandwidth가 정확도의 물리적 상한을 결정한다는 점은 변하지 않는다.
+예를 들어 1cm의 Range Resolution을 얻으려면 약 15GHz Bandwidth가 필요한데, 이는 Sub-THz 이상에서나 현실적인 수치다. 물론 분해능과 실제 정확도는 다르지만, Bandwidth가 정확도의 물리적 상한을 결정한다는 점은 변하지 않는다.
 
 **짧은 파장.** 파장이 짧아지면 같은 물리적 크기의 Antenna Array에 더 많은 소자를 배치할 수 있고, AoA 추정 정확도와 공간 분해능이 올라간다.
 
